@@ -26,7 +26,8 @@ const Note = {
   ],
   data() {
     return {
-      entity: this.entityObject
+      entity: this.entityObject,
+      open: false
     }
   },
   components: {
@@ -35,12 +36,13 @@ const Note = {
   template: `
     <div class="item">
       <div class="content">
-        <div class="header">
+        <div class="header" v-on:click="open = !open">
           {{ entity.body || '新建笔记' }}
         </div>
         <div class="extra">
           <editor
-            v-bind:entity-object="entity">
+            v-bind:entity-object="entity"
+            v-if="open">
           </editor>
         </div>
       </div>
