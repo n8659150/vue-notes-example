@@ -9,10 +9,20 @@ const Note = {
 }
 
 const Notes = {
+  data() {
+    return {
+      entities: []
+    }
+  },
   created() {
     loadCollection('notes')
       .then(collection => {
-        console.log(collection)
+        const _entities = collection.chain()
+          .find()
+          .simplesort('$loki', 'isdesc')
+          .data()
+        this.entities = _entities
+        console.log(this.entities)
       })
   },
   components: {
